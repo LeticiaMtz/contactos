@@ -1,0 +1,65 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color='danger'>
+    <ion-title>
+      Agenda
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+    <ion-input type="text" [(ngModel)]="myService.nombre" required></ion-input>
+  </ion-item>
+  <ion-list>
+    <ion-radio-group name="auto" [(ngModel)]="myService.genero">
+        <ion-label>Genero</ion-label>
+      <ion-item>
+        <ion-list-header>
+        <ion-label>Femenino</ion-label>
+        <ion-radio value="Femenino"></ion-radio>
+        </ion-list-header>
+      </ion-item>
+      <ion-item>
+        <ion-list-header>
+        <ion-label>Masculino</ion-label>
+        <ion-radio value="Masculino"></ion-radio>
+      </ion-list-header>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+  <ion-item>
+    <ion-label position="floating">Telefono</ion-label>
+    <ion-input type="text" [(ngModel)]="myService.telefono" required></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Email</ion-label>
+    <ion-input type="text" [(ngModel)]="myService.email" required></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Notas</ion-label>
+    <ion-input type="text" [(ngModel)]="myService.notas"></ion-input>
+  </ion-item> <br>
+  <ion-button (click)="myService.agregar(myService.nombre)" position="inline" expand="block">
+    <ion-icon name="add-circle-outline"></ion-icon></ion-button>
+  
+    <div *ngIf=myService.contactos>
+      <ion-card *ngFor="let cont of myService.elemento; let i = index;"
+       [ngClass]= "{'femenino':cont.genero === 'Femenino','masculino':cont.genero=== 'Masculino'}">
+        <ion-card-header>
+          <ion-card-title>{{cont.nombre}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-label>{{cont.genero}}</ion-label> <br>
+          <ion-label>{{cont.telefono}}</ion-label> <br>
+          <ion-label>{{cont.email}}</ion-label> <br>
+          <ion-label>{{cont.notas}}</ion-label> <br>
+            <ion-button (click)="myService.eliminar(i,cont.nombre)" color="danger" class="ion-float-right">
+              <ion-icon name="close-circle"></ion-icon>
+            </ion-button>
+        </ion-card-content>
+      </ion-card>
+    </div> 
+
+  <app-explore-container name="Tab 1 page"></app-explore-container>
+</ion-content>

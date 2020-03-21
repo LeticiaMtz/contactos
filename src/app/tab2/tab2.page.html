@@ -1,0 +1,36 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color='danger'>
+    <ion-title>
+      Consultar y eliminar
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <h1 *ngIf=!myService.nota>No se han añadido contactos</h1>
+  <ion-item *ngIf=myService.nota>
+    <ion-label>Mis Contactos</ion-label>
+    <ion-toggle color="tertiary" [(ngModel)]="myService.contactos"></ion-toggle>
+  </ion-item>
+  <div *ngIf=myService.contactos>
+    <ion-card *ngFor="let cont of myService.elemento; let i = index;"
+     [ngClass]= "{'femenino':cont.genero === 'Femenino','masculino':cont.genero=== 'Masculino'}">
+      <ion-card-header>
+        <ion-card-title>{{cont.nombre}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-label>{{cont.genero}}</ion-label> <br>
+        <ion-label>{{cont.telefono}}</ion-label> <br>
+        <ion-label>{{cont.email}}</ion-label> <br>
+        <ion-label>{{cont.notas}}</ion-label> <br>
+          <ion-button (click)="myService.eliminar(i,cont.nombre)" color="danger" class="ion-float-right">
+            <ion-icon name="close-circle"></ion-icon>
+          </ion-button>
+      </ion-card-content>
+    </ion-card>
+    <ion-button (click)="mostrar()" expand="block" fill="clear" shape="round">
+      Click me
+    </ion-button>
+  </div> 
+
+</ion-content>
